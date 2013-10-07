@@ -143,7 +143,7 @@
                                       last-name-prefix: #f))
                        (filter (lambda (sym)
                                  (syllable? (symbol->string sym)))
-                               (read-file "names-data/first-only.txt")))
+                               (read-file "data/first-only.txt")))
                   (map (lambda (d)
                          (parse-datum d
                                       first-name-prefix: #t
@@ -153,26 +153,26 @@
                                       last-name-prefix: #f))
                        (filter (lambda (sym)
                                  (= 2 (syllables (symbol->string sym))))
-                               (read-file "names-data/first-only.txt")))
+                               (read-file "data/first-only.txt")))
                   (map (lambda (d)
                          (parse-datum d
                                       first-name-prefix: #f
                                       first-name-suffix: #f
                                       last-name-prefix: #f
                                       last-name-suffix: #f))
-                       (read-file "names-data/first-only.txt"))
+                       (read-file "data/first-only.txt"))
                   (map (lambda (d)
                          (parse-datum d
                                       first-name-complete: #f
                                       expand-minuses: #t))
-                       (read-file "names-data/generic-components.txt"))
+                       (read-file "data/generic-components.txt"))
                   (map (lambda (d)
                          (parse-datum d
                                       expand-minuses: #t
                                       first-name-complete: #f
                                       first-name-prefix: #f
                                       first-name-suffix: #f))
-                       (read-file "names-data/last-components.txt")))))
+                       (read-file "data/last-components.txt")))))
 
 (define (pick-datum #!optional (condition #f))
   (let* ((lst (if condition
