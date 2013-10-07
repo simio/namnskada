@@ -181,7 +181,9 @@ moka
 loka
 slo
 tryn
-calf
+kal
+ral
+sal
 met
 sig
 fried
@@ -325,6 +327,16 @@ but
 pen
 ren
 få
+rå
+tå
+bå
+lå
+så
+må
+nå
+ind
+id
+-reta
 ana
 ines
 men
@@ -336,3 +348,9 @@ bens
 benz
 sans
 san
+ess
+es
+fin
+dus
+ful
+gen

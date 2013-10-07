@@ -422,6 +422,7 @@ felix
 ferdinand
 fernando
 fernissa
+findus
 filip
 filippa
 fingal
@@ -750,6 +751,7 @@ karin
 karl
 karla
 karna
+karo
 karolin
 karolina
 karoly
@@ -947,6 +949,7 @@ marja
 marjatta
 marjo
 mark
+marko
 markku
 markus
 marlen
