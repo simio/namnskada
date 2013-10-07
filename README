@@ -1,0 +1,55 @@
+Namnskada creates Swedish persons where none has previously existed.
+
+
+ 1. INSTALLATION
+
+Download and unpack the repo.
+
+
+ 2. REQUIREMENTS
+
+You need Chicken Scheme:
+
+	http://www.call-cc.org/
+
+Namnskada also depends on two Chicken eggs. Install them after Chicken:
+
+	$ chicken-install -s miscmacros define-record-and-printer
+
+
+ 3. RUNNING
+
+It's simple. After unpacking the repo, cd into the directory and then go:
+
+	$ csi -s ./namnskada.scm -d 3
+	Sten-Sören Babblorpalle
+	Skalfjällsbacke 26
+	852 89 Natebruk
+
+	Asta Mokk
+	Plankardumvägen 17
+	402 26 Andrasballö
+
+	Douglas Statarsjö
+	Häggången 1
+	898 33 Tvålsberg
+
+There are other modes than the post address mode shown above:
+
+	$ csi -s ./namnskada.scm -n -e
+	Felix Ainos Hörne
+	040-8317799
+	Stenvalt Ingerpampas
+	014-1766456
+	Laurentius Franklinsson
+	017-092826
+
+To find them all, just call:
+
+	$ csi -s ./namnskada.scm -h
+
+
+ 4. CAVEATS
+
+The data files are not yet compiled into the main file. The program will
+do nothing if the data directory is not in the current working directory.
