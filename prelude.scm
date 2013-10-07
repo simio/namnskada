@@ -14,7 +14,7 @@
 
 (module prelude *
 (import scheme chicken srfi-1 srfi-13 data-structures
-        stdinerr extras miscmacros)
+        stdinerr extras)
 
 ;;; Get cdr of PAIR, or eval to #f if it's not a pair (CDr If Pair)
 (define-syntax cdip

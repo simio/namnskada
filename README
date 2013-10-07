@@ -12,10 +12,6 @@ You need Chicken Scheme:
 
 	http://www.call-cc.org/
 
-Namnskada also depends on two Chicken eggs. Install them after Chicken:
-
-	$ chicken-install -s miscmacros define-record-and-printer
-
 
  3. RUNNING
 

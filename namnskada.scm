@@ -12,7 +12,7 @@
 ;;; ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-(use srfi-1 srfi-13 miscmacros posix define-record-and-printer)
+(use srfi-1 srfi-13 posix)
 
 (include "stdinerr")
 (use stdinerr)
@@ -21,7 +21,7 @@
 
 (define allow-expletives #t)
 
-(define-record-and-printer datum
+(define-record datum
   word
   possessive
   plural
@@ -30,6 +30,18 @@
   first-name-suffix
   last-name-prefix
   last-name-suffix)
+
+(define-record-printer (datum d port)
+  (with-output-to-port port
+    (lambda ()
+      (print (conc "Word:                " (datum-word d) #\newline
+                   "Possessive:          " (datum-possessive d) #\newline
+                   "Plural:              " (datum-plural d) #\newline
+                   "Complete first name? " (datum-first-name-complete d) #\newline
+                   "First name prefix?   " (datum-first-name-prefix d) #\newline
+                   "First name suffix?   " (datum-first-name-suffix d) #\newline
+                   "Last name prefix?    " (datum-last-name-prefix d) #\newline
+                   "Last name suffix?    " (datum-last-name-suffix d))))))
 
 (define-record person
   full-name
@@ -47,8 +59,10 @@
 (define-record-printer (person p port)
   (with-output-to-port port
     (lambda ()
-      (print (conc "Full Name:       " (person-full-name p) #\newline
-                   "First Name:      " (person-first-name p) #\newline
+      (print (conc "First Name:      " (person-first-name p) #\newline
+                   (if (not (string=? (person-first-name p) (person-full-name p)))
+                       (conc "Full Name:       " (person-full-name p) #\newline)
+                       "")
                    (if (person-middle-name p)
                        (conc "Middle Name:     " (person-middle-name p) #\newline)
                        "")
@@ -1162,4 +1176,9 @@
                        selected)))))
     (if usage
         (print (print-usage))
-        (repeat n (for-each print (proc))))))
+        (let loop ((i n))
+          (cond
+           ((= 0 i) n)
+           (else
+            (print (car (proc)))
+            (loop (- i 1))))))))
