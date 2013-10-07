@@ -54,7 +54,8 @@
   postal-address
   phone-number
   mobile-number
-  email-address)
+  email-address
+  number)
 
 (define-record-printer (person p port)
   (with-output-to-port port
@@ -70,6 +71,7 @@
                    (if (person-c/o p)
                        (conc "c/o:             " (person-c/o p) #\newline)
                        "")
+                   "Personal Number: " (person-number p) #\newline
                    "Street Name:     " (person-street-name p) #\newline
                    "Postal Address:  " (person-postal-address p) #\newline
                    "Postal Number:   " (person-postal-number p) #\newline
@@ -984,13 +986,13 @@
   (let* ((2pad (lambda (n) (string-pad (number->string n) 2 #\0)))
          (4pad (lambda (n) (string-pad (number->string n) 4 #\0)))
          (age-curve (list 0
-                          1 1 1
-                          2 2 2 2 2 2
-                          3 3 3 3 3 3 3
-                          4 4 4 4 4 4 4
+                          1 1 1 1 1
+                          2 2 2 2 2 2 2 2 2
+                          3 3 3 3 3 3 3 3 3
+                          4 4 4 4 4 4 4 4 4
                           5 5 5 5 5 5
                           6 6 6 6
-                          7 7
+                          7
                           8
                           9))
          (age-category (list-ref age-curve (random (length age-curve))))
@@ -1084,6 +1086,7 @@
          (postal-number (make-postal-number))
          (postal-address (make-postal-address))
          (phone-number (make-phone-number))
+         (personal-number (make-social-security-number))
          (mobile-number (if (mobile-number? phone-number)
                             phone-number
                             (make-phone-number force-mobile: #t)))
@@ -1099,7 +1102,8 @@
      postal-address
      phone-number
      mobile-number
-     email-address)))
+     email-address
+     personal-number)))
 
 (define (print-usage)
   (string-intersperse (list
