@@ -497,8 +497,10 @@
                                                   (1 "ro")
                                                   (1 ,(if make-prefix "hytte" "hytta"))
                                                   (1 ,(if make-prefix "hytte" "hyttan"))
+                                                  (1 "vara")
                                                   (1 "länge")
                                                   (1 ,(if make-prefix "vika" "viken"))
+                                                  (1 ,(if make-prefix "skärs" "skär"))
                                                   (2 ,(if make-prefix "viks" "vik"))
                                                   (1 ,(if make-prefix "kulle" "kullen"))
                                                   (3 ,(if make-prefix "kyrko" "kyrka"))
@@ -978,7 +980,7 @@
 
 (define (print-usage)
   (string-intersperse (list
-                       "Usage: names [flags] [n]"
+                       "Usage: namnskada [flags] [n]"
                        "  -a    Make all data"
                        "  -d    Make postal address"
                        "  -e    Make phone number"
