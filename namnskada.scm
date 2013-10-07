@@ -1,9 +1,9 @@
 ;;; Copyright (c) 2013 Jesper Raftegard <jesper@huggpunkt.org>
-;;; 
+;;;
 ;;; Permission to use, copy, modify, and distribute this software for any
 ;;; purpose with or without fee is hereby granted, provided that the above
 ;;; copyright notice and this permission notice appear in all copies.
-;;; 
+;;;
 ;;; THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 ;;; WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 ;;; MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
@@ -30,6 +30,40 @@
   first-name-suffix
   last-name-prefix
   last-name-suffix)
+
+(define-record person
+  full-name
+  first-name
+  middle-name
+  last-name
+  c/o
+  street-name
+  postal-number
+  postal-address
+  phone-number
+  mobile-number
+  email-address)
+
+(define-record-printer (person p port)
+  (with-output-to-port port
+    (lambda ()
+      (print (conc "Full Name:       " (person-full-name p) #\newline
+                   "First Name:      " (person-first-name p) #\newline
+                   (if (person-middle-name p)
+                       (conc "Middle Name:     " (person-middle-name p) #\newline)
+                       "")
+                   "Last Name:       " (person-last-name p) #\newline
+                   (if (person-c/o p)
+                       (conc "c/o:             " (person-c/o p) #\newline)
+                       "")
+                   "Street Name:     " (person-street-name p) #\newline
+                   "Postal Address:  " (person-postal-address p) #\newline
+                   "Postal Number:   " (person-postal-number p) #\newline
+                   "Phone Number:    " (person-phone-number p) #\newline
+                   "Mobile Number:   " (person-mobile-number p)
+                   (if (person-email-address p)
+                       (conc #\newline "Email Address:       " (person-email-address p))
+                       ""))))))
 
 (define (vowel? char)
   (string-any char "aAeEiIoOuUyYuUåÅäÄöÖüÜéÉáÁëË"))
@@ -302,9 +336,9 @@
                              (,(if no-common 0 250)
                               make-possessive-first-name
                               ((70 "son")
-                               (15 "on")
-                               (10 "en")
-                               (3 "dotter")))
+                               (10 "on")
+                               (5 "en")
+                               (2 "dotter")))
                              (,(if no-common 0 200)
                               datum-last-name-prefix
                               ((15 "quist")
@@ -321,10 +355,12 @@
                                (10 "bäck")
                                (1 "beck")
                                (5 "mark")
+                               (5 "strand")
                                (10 "rot")
                                (3 "bark")
                                (5 "skog")
                                (10 "sten")
+                               (2 "sand")
                                (1 "stein")
                                (10 "sjö")
                                (30 "gren")
@@ -474,16 +510,25 @@
                                                     adjust-case)
                                                  (3 ((1 shorter-datum short-datum adjust-case)
                                                      (1 short-datum shorter-datum adjust-case)))))
-                                             (80 ((30 last-name-no-common)
-                                                  (30 first-name-no-dashes)
-                                                  (1 datum datum adjust-case)
-                                                  (6 short-datum shorter-datum adjust-case)
-                                                  (3 shorter-datum short-datum adjust-case)
-                                                  (1 shorter-datum shorter-datum adjust-case)
-                                                  (50 ((1 shorter-datum)
-                                                       (1 short-datum))
-                                                      adjust-case)
-                                                  (15 datum adjust-case))
+                                             (80 ((1 ((1 "Övre")
+                                                      (1 "Nedre")
+                                                      (1 "Bortre")
+                                                      (1 "Större")
+                                                      (1 "Mindre")
+                                                      (1 "Lägre")
+                                                      (1 "Högre"))
+                                                     " ")
+                                                  (150 ""))
+                                                 ((90 last-name-no-common)
+                                                  (90 first-name-no-dashes)
+                                                  (3 datum datum adjust-case)
+                                                  (18 short-datum shorter-datum adjust-case)
+                                                  (9 shorter-datum short-datum adjust-case)
+                                                  (2 shorter-datum shorter-datum adjust-case)
+                                                  (150 ((1 shorter-datum)
+                                                        (1 short-datum))
+                                                       adjust-case)
+                                                  (45 datum adjust-case))
                                                  possible-infix
                                                  ((,(if bigger-profile 1 3)
                                                    ,(if make-prefix "gårds" "gård"))
@@ -510,6 +555,8 @@
                                                   (1 ,(if make-prefix "sjötorps" "sjötorp"))
                                                   (1 "ro")
                                                   (1 ,(if make-prefix "hytte" "hytta"))
+                                                  (1 ,(if make-prefix "sanda" "sand"))
+                                                  (2 ,(if make-prefix "strands" "strand"))
                                                   (1 ,(if make-prefix "hytte" "hyttan"))
                                                   (1 "vara")
                                                   (1 "länge")
@@ -547,6 +594,7 @@
                                                    ,(if make-prefix "lycko" "lyckan"))
                                                   (1 ,(if make-prefix "bols" "bolet"))
                                                   (6 ,(if make-prefix "sunds" "sund"))
+                                                  (1 ,(if make-prefix "grunds" "grund"))
                                                   (4 "sala")
                                                   (6 ,(if make-prefix "stads" "stad"))
                                                   (1 ,(if make-prefix "bola" "bol"))
@@ -576,7 +624,7 @@
                                               " och "
                                               ((1 possessive-first-name) (1 possessive-last-name))
                                               " "
-                                              datum-last-name-suffix)
+                                              datum-last-name-suffix adjust-case)
                                              (,(if (or make-prefix bigger-profile) 0 5)
                                               ((1 possessive-name)
                                                (1 possessive-first-name-no-dashes)
@@ -703,7 +751,7 @@
         (loop (cdr rest)
               (cons (datum-word (pick-datum (eval (car rest)))) result)))))))
 
-(define (make-post-address)
+(define (make-postal-address)
   (make-place-name bigger-profile: #t))
 
 (define (make-street-number)
@@ -743,7 +791,7 @@
                           (string-ref result (random (string-length result)))))
                        (else
                         (loop (cdr rest)
-                              (cons (string-pad "" (* 5 (length rest)) (car rest))
+                              (cons (string-pad "" (* (length rest) (length rest)) (car rest))
                                     result)))))
                     result)))
        ((number? (car rest))
@@ -756,8 +804,9 @@
         (loop (cdr rest)
               (cons (datum-word (pick-datum (eval (car rest)))) result)))))))
 
-(define (make-street-name #!key (with-number #f))
-  (let* ((country-side-number (number->string
+(define (make-street-name #!key (with-number #f) (with-number-marker #f))
+  (let* ((with-number (or with-number with-number-marker))
+         (country-side-number (number->string
                                (+ (or (and (= 0 (random 5))
                                            (random 10))
                                       0)
@@ -778,8 +827,14 @@
                                               (5 possessive-first-name)
                                               (5 possessive-last-name))
                                              " "
-                                             ((7 "väg") (5 "gata") (5 "stig") (3 "gång")
-                                              (2 "gränd") (3 "allé") (2 "backe") (1 "torg"))
+                                             ((7 "Väg")
+                                              (5 "Gata")
+                                              (5 "Stig")
+                                              (3 "Gång")
+                                              (2 "Gränd")
+                                              (3 "Allé")
+                                              (2 "Backe")
+                                              (1 "Torg"))
                                              ,(if with-number " " "")
                                              ,(if with-number 'street-number ""))
                                           (60 ((5 post-address-prefix)
@@ -832,7 +887,10 @@
                     (cdr rest))
               result))
        ((eq? 'street-number (car rest))
-        (loop (cdr rest) (cons (make-street-number) result)))
+        (loop (cdr rest) (cons (if with-number-marker
+                                   "#"
+                                   (make-street-number))
+                               result)))
        ((eq? 'post-address (car rest))
         (loop (cdr rest) (cons (make-place-name) result)))
        ((eq? 'post-address-prefix (car rest))
@@ -913,9 +971,9 @@
          (4pad (lambda (n) (string-pad (number->string n) 4 #\0)))
          (age-curve (list 0
                           1 1 1
-                          2 2 2 2 2
+                          2 2 2 2 2 2
                           3 3 3 3 3 3 3
-                          4 4 4 4 4 5
+                          4 4 4 4 4 4 4
                           5 5 5 5 5 5
                           6 6 6 6
                           7 7
@@ -965,11 +1023,13 @@
        ((= 0 n) (apply conc (reverse result)))
        (else (loop (- n 1) (cons (random 10) result)))))))
 
+(define (mobile-number? str)
+  (string-prefix? "07" str))
+
 (define (make-address #!key (additional-data #f))
   (let ((c/o (and (= 0 (random 40)) (make-c/o))))
     (conc (if additional-data
-              (make-registry-style-name mark-proc: (lambda (str)
-                                                     (conc "_" str "_")))
+              (make-registry-style-name)
               (make-name))
           (if additional-data #\newline "")
           (if c/o
@@ -981,7 +1041,7 @@
           (if (= 0 (random 30))
               ""
               (conc (make-street-name with-number: #t) #\newline))
-          (make-postal-number) " " (make-post-address) #\newline
+          (make-postal-number) " " (make-postal-address) #\newline
           (if additional-data
               (let ((phone (make-phone-number)))
                 (conc
@@ -992,10 +1052,46 @@
                  #\newline))
               ""))))
 
+(define (create-person #!key (seed #f))
+  (if seed (randomize seed))
+  (let* ((all-first-names (let loop ((n (+ 3 (- 2 (round (- (sqrt (sqrt (random 625))) 1)))))
+                                     (result '()))
+                            (cond
+                             ((= 0 n) (reverse result))
+                             (else (loop (- n 1) (cons (make-first-name) result))))))
+         (full-name (string-intersperse all-first-names))
+         (first-name (list-ref all-first-names (random (length all-first-names))))
+         (middle-name (if (= 0 (random 40)) (make-last-name) #f))
+         (last-name (make-last-name))
+         (c/o (if (= 0 (random 40)) (make-c/o) #f))
+         (street-number (if (< 1 (random 40)) (make-street-number) #f))
+         (street-name-raw (make-street-name with-number-marker: #t))
+         (street-name (string-replace-every "#" street-number street-name-raw))
+         (postal-number (make-postal-number))
+         (postal-address (make-postal-address))
+         (phone-number (make-phone-number))
+         (mobile-number (if (mobile-number? phone-number)
+                            phone-number
+                            (make-phone-number force-mobile: #t)))
+         (email-address #f))
+    (make-person
+     full-name
+     first-name
+     middle-name
+     last-name
+     c/o
+     street-name
+     postal-number
+     postal-address
+     phone-number
+     mobile-number
+     email-address)))
+
 (define (print-usage)
   (string-intersperse (list
                        "Usage: namnskada [flags] [n]"
                        "  -a    Make all data"
+                       "  -c    Make record"
                        "  -d    Make postal address"
                        "  -e    Make phone number"
                        "  -f    Make all first names"
@@ -1018,6 +1114,7 @@
                               (string->number n?))))
                   1)))
   (let* ((all (member "-a" args))
+         (record-style (member "-c" args))
          (address (member "-d" args))
          (street (member "-r" args))
          (place (member "-p" args))
@@ -1054,6 +1151,8 @@
                                                (make-phone-number))
                                           (and (or mobile-number all)
                                                (make-phone-number force-mobile: #t))
+                                          (and record-style
+                                               (create-person))
                                           (and registry
                                                (make-address additional-data: #t))
                                           (and address
