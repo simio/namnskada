@@ -30,9 +30,14 @@ It's simple. After unpacking the repo, cd into the directory and then go:
 	Häggången 1
 	898 33 Tvålsberg
 
+You may also compile and install a binary:
+
+	$ csc namnskada.scm
+	$ sudo install ./namnskada /usr/opt/bin
+
 There are other modes than the post address mode shown above:
 
-	$ csi -s ./namnskada.scm -n -e
+	$ namnskada -n -e
 	Felix Ainos Hörne
 	040-8317799
 	Stenvalt Ingerpampas
@@ -42,10 +47,15 @@ There are other modes than the post address mode shown above:
 
 To find them all, just call:
 
-	$ csi -s ./namnskada.scm -h
+	$ namnskada -h
 
 
  4. CAVEATS
 
-The data files are not yet compiled into the main file. The program will
-do nothing if the data directory is not in the current working directory.
+Some care has been taken to not produce offensive names, though it is
+impossible to prevent all such combinations.
+
+By default, the offensive names filter is turned OFF. To enable it,
+you need to set the value of allow-expletives in namnskada.scm to #f:
+
+	(define allow-expletives #f)
