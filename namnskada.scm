@@ -196,6 +196,10 @@
     (apply construct-datum (append d construct-opts)))
    (else (error "Neither string, symbol nor list in datum" d))))
 
+(include "data/first-only.scm")
+(include "data/generic-components.scm")
+(include "data/last-components.scm")
+
 (define datum
   (filter identity
           (append (map (lambda (d)
@@ -207,7 +211,7 @@
                                       last-name-prefix: #f))
                        (filter (lambda (sym)
                                  (syllable? (symbol->string sym)))
-                               (read-file "data/first-only.txt")))
+                               data-first-only))
                   (map (lambda (d)
                          (parse-datum d
                                       first-name-prefix: #t
@@ -217,26 +221,26 @@
                                       last-name-prefix: #f))
                        (filter (lambda (sym)
                                  (= 2 (syllables (symbol->string sym))))
-                               (read-file "data/first-only.txt")))
+                               data-first-only))
                   (map (lambda (d)
                          (parse-datum d
                                       first-name-prefix: #f
                                       first-name-suffix: #f
                                       last-name-prefix: #f
                                       last-name-suffix: #f))
-                       (read-file "data/first-only.txt"))
+                       data-first-only)
                   (map (lambda (d)
                          (parse-datum d
                                       first-name-complete: #f
                                       expand-minuses: #t))
-                       (read-file "data/generic-components.txt"))
+                       data-generic-components)
                   (map (lambda (d)
                          (parse-datum d
                                       expand-minuses: #t
                                       first-name-complete: #f
                                       first-name-prefix: #f
                                       first-name-suffix: #f))
-                       (read-file "data/last-components.txt")))))
+                       data-last-components))))
 
 (define (pick-datum #!optional (condition #f))
   (let* ((lst (if condition

@@ -1,3 +1,4 @@
+(define data-last-components '(
 -apa
 -bana
 -bittra
@@ -52,6 +53,7 @@ hörna
 -klåda
 -koling
 -komplex
+("dase" expletive: #t)
 -korta
 -kossa
 -kruka
@@ -595,6 +597,7 @@ hona
 hoof
 hoper
 hoppare
+("ollon" expletive: #t)
 hoppsa
 hov
 huk
@@ -702,6 +705,7 @@ knop
 knorr
 knäcke
 koala
+("runk" expletive: #t)
 kock
 kok
 kol
@@ -946,11 +950,14 @@ näsan
 nästan
 näv
 näver
+("tatta" expletive: #t)
+("tuttar" expletive: #t)
 nääs
 nöjd
 nöjda
 nöjde
 nöt
+("snopp" expletive: #t)
 nött
 nötte
 ode
@@ -1136,19 +1143,8 @@ sand
 sand
 sarv
 sat
-("-runka" expletive: #t)
-("bröst" expletive: #t)
-("dase" expletive: #t)
-("klitt" expletive: #t)
-("ollon" expletive: #t)
-("runk" expletive: #t)
 ("runke" expletive: #t)
-("röv" expletive: #t)
-("skrev" expletive: #t)
-("snopp" expletive: #t)
-("svullo" expletive: #t)
-("tatta" expletive: #t)
-("tuttar" expletive: #t)
+svull
 satan
 sattyg
 sax
@@ -1190,7 +1186,8 @@ skodd
 skoj
 skojare
 skratt
-skreva
+("skreva" expletive: #t)
+("skrev" expletive: #t)
 skrik
 skrika
 skriv
@@ -1217,6 +1214,7 @@ slutet
 slät
 slätt
 slätte
+("bröst" expletive: #t)
 smal
 smala
 smart
@@ -1285,6 +1283,7 @@ stora
 store
 stortå
 strand
+("röv" expletive: #t)
 strid
 strunt
 strunte-
@@ -1352,6 +1351,7 @@ taxi
 tegel
 tejp
 tellus
+("klitt" expletive: #t)
 tidie
 till
 ting
@@ -2290,6 +2290,7 @@ bås
 båsen
 ross
 rossen
+("-runka" expletive: #t)
 bloss
 blossad
 klapp
@@ -2319,3 +2320,6 @@ böös
 skymning
 gryning
 saga
+favorit
+
+))

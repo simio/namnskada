@@ -1,4 +1,5 @@
-("hild" last-name-suffix? #f)
+(define data-generic-components '(
+("hild" last-name-suffix: #f)
 ("ira" last-name-complete: #f first-name-prefix: #f)
 ("ita" last-name-complete: #f first-name-prefix: #f)
 ("lem" expletive: #t)
@@ -354,3 +355,5 @@ fin
 dus
 ful
 gen
+
+))

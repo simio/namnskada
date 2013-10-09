@@ -1,3 +1,4 @@
+(define data-first-only '(
 abbe
 abel
 abraham
@@ -1410,3 +1411,5 @@ zarah
 åslög
 örjan
 östen
+
+))
