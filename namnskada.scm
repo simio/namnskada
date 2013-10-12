@@ -573,7 +573,7 @@
                                                   (2 ,(if make-prefix "ströms" "ström"))
                                                   (2 "berga")
                                                   (1 "ro")
-                                                  (1 ,(if make-prefix "hytte" "hytta"))
+                                                  (1 ,(if make-prefix "hytte" "hyttan"))
                                                   (1 ,(if make-prefix "sanda" "sand"))
                                                   (1 ,(if make-prefix "arps" "arp"))
                                                   (2 ,(if make-prefix "strands" "strand"))
