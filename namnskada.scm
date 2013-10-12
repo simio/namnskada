@@ -201,24 +201,12 @@
 (include "data/last-components.scm")
 
 (define datum
-  (filter identity
-          (append (map (lambda (d)
-                         (parse-datum d
-                                      first-name-suffix: #t
-                                      first-name-complete: #f
-                                      last-name-complete: #f
-                                      last-name-suffix: #f
-                                      last-name-prefix: #f))
+  (filter datum?
+          (append (map parse-datum
                        (filter (lambda (sym)
                                  (syllable? (symbol->string sym)))
                                data-first-only))
-                  (map (lambda (d)
-                         (parse-datum d
-                                      first-name-prefix: #t
-                                      first-name-complete: #f
-                                      last-name-complete: #f
-                                      last-name-suffix: #f
-                                      last-name-prefix: #f))
+                  (map parse-datum
                        (filter (lambda (sym)
                                  (= 2 (syllables (symbol->string sym))))
                                data-first-only))
@@ -229,8 +217,7 @@
                                       last-name-prefix: #f
                                       last-name-suffix: #f))
                        (filter (lambda (sym)
-                                 (and (not (syllable? (symbol->string sym)))
-                                      (not (= 2 (syllables (symbol->string sym))))))
+                                 (and (< 2 (syllables (symbol->string sym)))))
                                data-first-only))
                   (map (lambda (d)
                          (parse-datum d
