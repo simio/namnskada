@@ -15,9 +15,9 @@
 (use srfi-1 srfi-13 posix)
 
 (include "stdinerr")
-(use stdinerr)
+(import stdinerr)
 (include "prelude")
-(use prelude)
+(import prelude)
 
 (define allow-expletives #t)
 
