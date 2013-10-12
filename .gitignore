@@ -1,0 +1,9 @@
+namnskada
+*.swp
+*.core
+*.so
+*.import.scm
+
+# Bad gnu!
+*~
+[#]*[#]
