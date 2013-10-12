@@ -228,7 +228,10 @@
                                       first-name-suffix: #f
                                       last-name-prefix: #f
                                       last-name-suffix: #f))
-                       data-first-only)
+                       (filter (lambda (sym)
+                                 (and (not (syllable? (symbol->string sym)))
+                                      (not (= 2 (syllables (symbol->string sym))))))
+                               data-first-only))
                   (map (lambda (d)
                          (parse-datum d
                                       first-name-complete: #f
@@ -1122,6 +1125,23 @@
      email-address
      personal-number)))
 
+(define (check-datum-uniqueness)
+  (let loop ((rest datum)
+             (counter 0)
+             (result '()))
+    (cond
+     ((null? rest)
+      (stderr counter " datums checked for duplicates.")
+      result)
+     (else
+      (loop (cdr rest)
+            (+ 1 counter)
+            (if (find (lambda (datum)
+                        (string=? (datum-word datum) (datum-word (car rest))))
+                      (cdr rest))
+                (cons (datum-word (car rest)) result)
+                result))))))
+
 (define (print-usage)
   (string-intersperse (list
                        "Usage: namnskada [flags] [n]"
@@ -1149,6 +1169,7 @@
                               (string->number n?))))
                   1)))
   (let* ((all (member "-a" args))
+         (uniqueness (member "uniq" args))
          (record-style (member "-c" args))
          (address (member "-d" args))
          (street (member "-r" args))
@@ -1166,6 +1187,8 @@
          (proc (lambda ()
                  (let ((selected (filter identity
                                          (list
+                                          (and uniqueness
+                                               (check-datum-uniqueness))
                                           (and first-name
                                                (make-first-name))
                                           (and (or all-first-names all)
