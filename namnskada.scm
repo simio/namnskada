@@ -217,7 +217,7 @@
                                       last-name-prefix: #f
                                       last-name-suffix: #f))
                        (filter (lambda (sym)
-                                 (and (< 2 (syllables (symbol->string sym)))))
+                                 (< 2 (syllables (symbol->string sym))))
                                data-first-only))
                   (map (lambda (d)
                          (parse-datum d
