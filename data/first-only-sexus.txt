@@ -1,61 +1,60 @@
-(define data-first-only '(
-abbe
-abel
-abraham
-acke
+m abbe
+m abel
+m abraham
+m acke
 ada
-adalbert
-adam
+m adalbert
+m adam
 adela
 adele
 adelia
 adelina
 adla
-adolf
+m adolf
 adolfina
-adrian
+m adrian
 adriana
 adrienne
 agata
-agaton
+m agaton
 agda
-age
-agge
+m age
+m agge
 agna
-agne
+m agne
 agnes
 agneta
 agnete
-ahmed
+m ahmed
 aila
-aili
+m aili
 aina
 aini
 aino
-alarik
+m alarik
 alba
-albert
+m albert
 albertina
-alberto
-albin
-albrekt
+m alberto
+m albin
+m albrekt
 alda
-alef
+m alef
 alejandra
-alejandro
-alessandro
-alex
-alexander
+m alejandro
+m alessandro
+m alex
+m alexander
 alexandra
 alexia
-alexis
-alexius
-alf
+m alexis
+m alexius
+m alf
 alfhild
-alfons
-alfred
+m alfons
+m alfred
 alfrida
-algot
+m algot
 ali
 alice
 alicia
@@ -63,38 +62,38 @@ alida
 alina
 aline
 alla
-allan
+m allan
 alli
 allie
 ally
 alma
-alrik
+m alrik
 alva
-alvar
-alve
+m alvar
+m alve
 alvi
-alvin
+m alvin
 alvina
 alvy
-amadeus
+m amadeus
 amalia
 amalie
 amanda
-amandus
+m amandus
 amelia
 amelie
 amy
-anders
-andras
+m anders
+m andras
 andrea
-andreas
-andrej
-andres
-andrew
+m andreas
+m andrej
+m andres
+m andrew
 andrietta
-andris
-andré
-andy
+m andris
+m andré
+m andy
 angela
 angelica
 angelika
@@ -104,58 +103,58 @@ anneli
 annelie
 annette
 annika
-annsi
-anselm
-ansgar
-ansgarius
-ante
-antero
-anthony
+m annsi
+m anselm
+m ansgar
+m ansgarius
+m ante
+m antero
+m anthony
 antoinetta
 antoinette
-anton
-antoni
+m anton
+m antoni
 antonia
 antonina
-antonio
-antonius
-antti
-arent
+m antonio
+m antonius
+m antti
+m arent
 ariette
-arild
-arndt
-arne
-arno
-arnold
-aron
-arto
-artur
-arve
-arvid
+m arild
+m arndt
+m arne
+m arno
+m arnold
+m aron
+m arto
+m artur
+m arve
+m arvid
 arvida
-arvo
-asbjörn
+m arvo
+m asbjörn
 aslög
-assar
-asser
+m assar
+m asser
 asta
 astrid
-august
+m august
 augusta
-augustin
-augustinus
+m augustin
+m augustinus
 aura
 aurora
 aurore
-axel
+m axel
 axelia
 axelina
-balder
-baltsar
+m balder
+m baltsar
 barbara
 barbro
-barthold
-bartolomeus
+m barthold
+m bartolomeus
 beata
 beate
 beatrice
@@ -164,26 +163,26 @@ belinda
 belle
 bella
 bellis
-ben
-benedikt
-bengt
+m ben
+m benedikt
+m bengt
 bengta
 benita
-benjamin
-benni
-bennie
-benny
-bent
+m benjamin
+m benni
+m bennie
+m benny
+n bent
 berit
 berna
-bernhard
+m bernhard
 bernhardina
-bernt
-bert
+m bernt
+m bert
 berta
-bertel
-berthold
-bertil
+m bertel
+m berthold
+m bertil
 bertina
 bessie
 beth
@@ -192,59 +191,59 @@ bettina
 betty
 bibbi
 bill
-billy
+m billy
 bina
-birger
+m birger
 birgit
 birgitta
 birgitte
 birte
-bjarne
-björn
-björne
-björner
+m bjarne
+m björn
+m björne
+m björner
 blenda
-bo
-bob
-bobby
+m bo
+m bob
+m bobby
 bodil
 boel
-bojan
+n bojan
 bolla
-bonde
+m bonde
 borghild
-boris
-bosse
+m boris
+m bosse
 botilda
-botvid
-brennan
+m botvid
+m brennan
 brigitta
 brigitte
 britt
 britta
 britte
 britten
-bror
-bruno
-brutus
-brynolf
+m bror
+m bruno
+m brutus
+m brynolf
 böret
-börje
+m börje
 calla
 camilla
 carina
 carine
 carita
-carlo
-carlos
+m carlo
+m carlos
 carol
 carola
 carole
 caroline
-caspar
+m caspar
 cecilia
-charles
-charlie
+m charles
+m charlie
 charlott
 charlotta
 charlotte
@@ -521,6 +520,7 @@ gunvor
 gurly
 gustaf
 gustav
+gustav
 gustava
 gusten
 gusti
@@ -777,6 +777,7 @@ kerstin
 kerttu
 kettil
 ketty
+kevin
 kevin
 kickan
 kicki
@@ -1404,6 +1405,7 @@ yrsa
 yvette
 yvonne
 zarah
+zelda
 åge
 ågot
 åke
@@ -1412,5 +1414,3 @@ zarah
 åslög
 örjan
 östen
-
-))
