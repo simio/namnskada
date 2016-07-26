@@ -1,4 +1,4 @@
-;;; Copyright (c) 2013 Jesper Raftegard <jesper@huggpunkt.org>
+;;; Copyright (c) 2013, 2016 Jesper Raftegard <jesper@huggpunkt.org>
 ;;;
 ;;; Permission to use, copy, modify, and distribute this software for any
 ;;; purpose with or without fee is hereby granted, provided that the above
@@ -12,7 +12,7 @@
 ;;; ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ;;; OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-(use srfi-1 srfi-13 posix)
+(use srfi-1 srfi-13 posix (prefix random-mtzig mtzig:))
 
 (include "stdinerr")
 (import stdinerr)
@@ -241,17 +241,28 @@
         (list-ref lst (random len))
         #f)))
 
-(define (expand-combination combination)
-  (let loop ((n (car combination))
-             (value '()))
-    (cond
-     ((= 0 n) value)
-     (else (loop (- n 1) (cons (cdr combination) value))))))
+(define random-fraction
+  (let ((state (mtzig:init)))
+    (lambda ()
+      (mtzig:randu! state))))
+
+(define (uneven-random combinations)
+  (let* ((dist (let loop ((rest combinations)
+                          (result '())
+                          (sum 0))
+                 (if (null? rest) result
+                     (let ((new-sum (+ sum (caar rest))))
+                       (loop (cdr rest)
+                             (cons (cons new-sum (cdar rest)) result)
+                             new-sum)))))
+         (target (* (random-fraction) (caar dist)))
+         (dist (reverse dist)))
+    (find (lambda (o)
+            (>= (car o) target))
+          dist)))
 
 (define (pick-combination combinations)
-  (let* ((combination (apply append (map expand-combination combinations)))
-         (len (length combination)))
-    (list-ref combination (random len))))
+  (cdr (uneven-random combinations)))
 
 (define (without-vowel-consonant-suffix word)
   (let ((backwards (reverse (string->list word))))
